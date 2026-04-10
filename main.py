@@ -8,8 +8,8 @@ from typing import Optional, List
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import psycopg2
-from psycopg2.extras import RealDictCursor
+import psycopg
+from psycopg.extras import RealDictCursor
 
 # Render.com сам даёт переменную DATABASE_URL
 DATABASE_URL = os.getenv("DATABASE_URL", "")
@@ -25,7 +25,7 @@ app.add_middleware(
 
 
 def get_db():
-    conn = psycopg2.connect(DATABASE_URL, cursor_factory=RealDictCursor)
+    conn = psycopg.connect(DATABASE_URL, cursor_factory=RealDictCursor)
     return conn
 
 
